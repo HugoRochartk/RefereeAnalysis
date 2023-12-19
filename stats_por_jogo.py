@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-df = pd.read_csv("statsref.csv")
+df = pd.read_csv("datasets/statsref2324.csv")
 
 
 def jogos_por_func():
