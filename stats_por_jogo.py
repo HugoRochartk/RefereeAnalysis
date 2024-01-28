@@ -24,25 +24,47 @@ def spj_menu(m):
     r = jogos_por_func()
     njogos = r[m]
     print("\n\n\n--------------------------------------------------")
-    print("1 - Golos")
-    print("2 - Penaltys")
-    print("3 - Cartões amarelos")
-    print("4 - Cartões vermelhos")
-    print("5 - Tempo de compensação")
-    print("6 - Sair")
+    print("1 - Percentagem de vitórias/empate")
+    print("2 - Golos")
+    print("3 - Penaltys")
+    print("4 - Cartões amarelos")
+    print("5 - Cartões vermelhos")
+    print("6 - Tempo de compensação")
+    print("7 - Sair")
     n = int(input("\nOpção: "))
     if(n == 1):
-        golos(m, njogos)
+        percentagem(m, njogos)
     elif(n == 2):
-        penaltys(m, njogos)
+        golos(m, njogos)
     elif(n == 3):
-        amarelos(m, njogos)
+        penaltys(m, njogos)
     elif(n == 4):
-        vermelhos(m, njogos)
+        amarelos(m, njogos)
     elif(n == 5):
+        vermelhos(m, njogos)
+    elif(n == 6):
         compensacao(m, njogos)        
     else:
         pass
+
+
+def percentagem(m, njogos):
+
+    c = e = f = 0
+
+    for i, line in df.iterrows():
+        if (line['funcao'] == m):
+            if(line['goloscasa'] > line['golosfora']):
+                c += 1
+            elif(line['goloscasa'] == line['golosfora']):
+                e += 1
+            else:
+                f += 1
+    
+    print("\n\nPercentagem de vitória caseira, Percentagem de empate, Percentagem de vitória da equipa de fora")
+    print(f"{round((c/njogos)*100,2)}%, {round((e/njogos)*100,2)}%, {round((f/njogos)*100,2)}%")
+                
+
 
 
 
@@ -52,7 +74,7 @@ def golos(m, njogos):
     f = 0
     
     for i, line in df.iterrows(): 
-        if (i != 0 and line['funcao'] == m):
+        if (line['funcao'] == m):
             c += line['goloscasa']
             f += line['golosfora']
 
@@ -68,7 +90,7 @@ def penaltys(m, njogos):
     f = 0
     
     for i, line in df.iterrows(): 
-        if (i != 0 and line['funcao'] == m):
+        if (line['funcao'] == m):
             c += line['penaltyscasa']
             f += line['penaltysfora']
         
@@ -83,7 +105,7 @@ def amarelos(m, njogos):
     f = 0
     
     for i, line in df.iterrows(): 
-        if (i != 0 and line['funcao'] == m):
+        if (line['funcao'] == m):
             c += line['amareloscasa']
             f += line['amarelosfora']
         
@@ -98,7 +120,7 @@ def vermelhos(m, njogos):
     f = 0
     
     for i, line in df.iterrows(): 
-        if (i != 0 and line['funcao'] == m):
+        if (line['funcao'] == m):
             c += line['vermelhoscasa']
             f += line['vermelhosfora']
         
@@ -128,7 +150,7 @@ def compensacao(m, njogos):
     p2 = 0
     
     for i, line in df.iterrows(): 
-        if (i != 0 and line['funcao'] == m):
+        if (line['funcao'] == m):
             p1 += line['compensacao1p']
             p2 += line['compensacao2p']
         
