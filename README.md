@@ -1,5 +1,4 @@
 # RefereeAnalysis2324
-My stats as referee in 23/24
-
+My stats as referee
 
 Run script.py
